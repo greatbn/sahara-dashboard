@@ -333,7 +333,8 @@ def cluster_create(request, name, plugin_name, hadoop_version,
                    is_transient=None, description=None, cluster_configs=None,
                    node_groups=None, user_keypair_id=None, anti_affinity=None,
                    net_id=None, count=None, use_autoconfig=None,
-                   is_public=None, is_protected=None):
+                   is_public=None, is_protected=None,
+                   is_autoscale=None, max_cpu=None, max_ram=None):
     return client(request).clusters.create(
         name=name,
         plugin_name=plugin_name,
@@ -350,7 +351,10 @@ def cluster_create(request, name, plugin_name, hadoop_version,
         count=count,
         use_autoconfig=use_autoconfig,
         is_public=is_public,
-        is_protected=is_protected)
+        is_protected=is_protected,
+        is_autoscale=is_autoscale,
+        max_cpu=max_cpu,
+        max_ram=max_ram)
 
 
 def cluster_scale(request, cluster_id, scale_object):
@@ -380,13 +384,17 @@ def cluster_delete(request, cluster_id):
 
 
 def cluster_update(request, cluster_id, name=None, description=None,
-                   is_public=None, is_protected=None, shares=None):
+                   is_public=None, is_protected=None, shares=None,
+                   is_autoscale=None, max_cpu=None, max_ram=None):
     return client(request).clusters.update(cluster_id,
                                            name=name,
                                            description=description,
                                            is_public=is_public,
                                            is_protected=is_protected,
-                                           shares=shares)
+                                           shares=shares,
+                                           is_autoscale=is_autoscale,
+                                           max_cpu=max_cpu,
+                                           max_ram=max_ram)
 
 
 def cluster_update_shares(request, cl_id, shares):

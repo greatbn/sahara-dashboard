@@ -81,6 +81,26 @@ class GeneralConfigAction(workflows.Action):
                                        help_text=(
                                            _("Number of clusters to launch.")))
 
+    is_autoscale = forms.BooleanField(
+        label=_("Auto Scale"),
+        help_text=_("If selected, cluser will be autoscale"),
+        required=False,
+        widget=forms.CheckboxInput(),
+        initial=False)
+
+    max_cpu = forms.IntegerField(min_value=1,
+                                 label=_("CPU Threshold"),
+                                 initial=False,
+                                 required=False,
+                                 help_text=(
+                                     _("CPU Threshold to scale cluster")))
+    max_ram = forms.IntegerField(min_value=1,
+                                 label=_("RAM Threshold"),
+                                 initial=False,
+                                 required=False,
+                                 help_text=(
+                                     _("RAM Threshold to scale cluster")))
+    
     image = forms.DynamicChoiceField(label=_("Base Image"),
                                      add_item_link=BASE_IMAGE_URL)
 
@@ -230,7 +250,10 @@ class ConfigureCluster(whelpers.StatusFormatMixin, workflows.Workflow):
                 count=context['general_cluster_count'],
                 net_id=context.get("general_neutron_management_network", None),
                 is_public=context['general_is_public'],
-                is_protected=context['general_is_protected']
+                is_protected=context['general_is_protected'],
+                is_autoscale=context['general_is_autoscale'],
+                max_cpu=context['general_max_cpu'],
+                max_ram=context['general_max_ram']
             )
             return True
         except api_base.APIException as e:
