@@ -88,19 +88,19 @@ class GeneralConfigAction(workflows.Action):
         widget=forms.CheckboxInput(),
         initial=False)
 
-    max_cpu = forms.IntegerField(min_value=1,
+    max_cpu = forms.IntegerField(min_value=0,
                                  label=_("CPU Threshold"),
-                                 initial=False,
+                                 initial=0,
                                  required=False,
                                  help_text=(
                                      _("CPU Threshold to scale cluster")))
-    max_ram = forms.IntegerField(min_value=1,
+    max_ram = forms.IntegerField(min_value=0,
                                  label=_("RAM Threshold"),
-                                 initial=False,
+                                 initial=0,
                                  required=False,
                                  help_text=(
                                      _("RAM Threshold to scale cluster")))
-    
+
     image = forms.DynamicChoiceField(label=_("Base Image"),
                                      add_item_link=BASE_IMAGE_URL)
 
