@@ -89,18 +89,30 @@ class GeneralConfigAction(workflows.Action):
         initial=False)
 
     max_cpu = forms.IntegerField(min_value=0,
-                                 label=_("CPU Threshold"),
+                                 label=_("Max CPU Threshold"),
                                  initial=0,
                                  required=False,
                                  help_text=(
                                      _("CPU Threshold to scale cluster")))
     max_ram = forms.IntegerField(min_value=0,
-                                 label=_("RAM Threshold"),
+                                 label=_("Max RAM Threshold"),
                                  initial=0,
                                  required=False,
                                  help_text=(
                                      _("RAM Threshold to scale cluster")))
 
+    min_cpu = forms.IntegerField(min_value=0,
+                                 label=_("Min CPU Threshold"),
+                                 initial=0,
+                                 required=False,
+                                 help_text=(
+                                     _("CPU Threshold to scale cluster")))
+    min_ram = forms.IntegerField(min_value=0,
+                                 label=_("Min RAM Threshold"),
+                                 initial=0,
+                                 required=False,
+                                 help_text=(
+                                     _("RAM Threshold to scale cluster")))
     image = forms.DynamicChoiceField(label=_("Base Image"),
                                      add_item_link=BASE_IMAGE_URL)
 
@@ -253,7 +265,9 @@ class ConfigureCluster(whelpers.StatusFormatMixin, workflows.Workflow):
                 is_protected=context['general_is_protected'],
                 is_autoscale=context['general_is_autoscale'],
                 max_cpu=context['general_max_cpu'],
-                max_ram=context['general_max_ram']
+                max_ram=context['general_max_ram'],
+                min_cpu=context['general_min_cpu'],
+                min_ram=context['general_min_ram']
             )
             return True
         except api_base.APIException as e:

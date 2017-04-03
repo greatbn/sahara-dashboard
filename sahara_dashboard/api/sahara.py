@@ -334,7 +334,8 @@ def cluster_create(request, name, plugin_name, hadoop_version,
                    node_groups=None, user_keypair_id=None, anti_affinity=None,
                    net_id=None, count=None, use_autoconfig=None,
                    is_public=None, is_protected=None,
-                   is_autoscale=None, max_cpu=None, max_ram=None):
+                   is_autoscale=None, max_cpu=None, max_ram=None,
+                   min_cpu=None, min_ram=None):
     return client(request).clusters.create(
         name=name,
         plugin_name=plugin_name,
@@ -354,7 +355,9 @@ def cluster_create(request, name, plugin_name, hadoop_version,
         is_protected=is_protected,
         is_autoscale=is_autoscale,
         max_cpu=max_cpu,
-        max_ram=max_ram)
+        max_ram=max_ram,
+        min_cpu=min_cpu,
+        min_ram=min_ram)
 
 
 def cluster_scale(request, cluster_id, scale_object):

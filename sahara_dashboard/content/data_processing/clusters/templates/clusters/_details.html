@@ -56,10 +56,14 @@
     <dd>{{ cluster.is_public|yesno }}</dd>
     <dt>{% trans "Auto Scale" %}</dt>
     <dd>{{ cluster.is_autoscale|yesno }}</dd>
-    <dt>{% trans "CPU Threshold" %}</dt>
+    <dt>{% trans "Max CPU Threshold" %}</dt>
     <dd>{{ cluster.max_cpu }}</dd>
-    <dt>{% trans "RAM Threshold" %}</dt>
+    <dt>{% trans "Max RAM Threshold" %}</dt>
     <dd>{{ cluster.max_ram }}</dd>
+    <dt>{% trans "Min CPU Threshold" %}</dt>
+    <dd>{{ cluster.min_cpu }}</dd>
+    <dt>{% trans "Min RAM Threshold" %}</dt>
+    <dd>{{ cluster.min_ram }}</dd>
     <dt>{% trans "Protected" %}</dt>
     <dd>{{ cluster.is_protected|yesno }}</dd>
   </dl>
